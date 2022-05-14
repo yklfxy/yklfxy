@@ -1,0 +1,178 @@
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Arrays;
+import java.util.Date;
+
+public class DateSplit {
+    // 创建 LocalDate
+// 获取当前年月日
+    //新时间对象：
+
+//            1.LocalDate表示年月日
+//2.LocalTime表示时分秒
+//3.LocalDateTime表示年月日时分秒
+//4.Instant：表示时刻，不直接对应年月日信息，需要通过时区转换
+//5.ZonedDateTime： 表示特定时区的日期和时间
+//6.ZoneId/ZoneOffset：表示时区
+//            复制
+//1、获取对象的方法
+    //通过静态方法now()获取当前时间
+//    LocalDate now1 = LocalDate.now();
+//    LocalTime now2 = LocalTime.now();
+//    LocalDateTime now3 = LocalDateTime.now();
+//
+//    //通过静态方法of可以设置时间
+//    LocalDate of1 = LocalDate.of(2008, 10, 10);
+//    LocalTime of2 = LocalTime.of(12, 12, 12);
+//    LocalDateTime of3 = LocalDateTime.of(1994, 10, 10, 1, 2, 3);
+//
+//    //对象之间可以互相转换
+//    LocalDateTime now = LocalDateTime.now();
+//    LocalDate localDate = now.toLocalDate();
+//    LocalTime localTime = now.toLocalTime();
+////    复制
+////2.获取年月日时分秒的方法:
+//    LocalDateTime now = LocalDateTime.now();
+//    int year = now.getYear();//年
+//    Month month = now.getMonth();//获取的是哪一月，返回的是一个枚举类型
+//    int monthValue = now.getMonthValue();//月
+//    int dayOfMonth = now.getDayOfMonth();//日
+//    int dayOfYear = now.getDayOfYear();//一年中的第几天
+//    int hour = now.getHour();//时
+//    int minute = now.getMinute();//分
+//    int second = now.getSecond();//秒
+//    int nano = now.getNano();//毫秒
+////  System.out.println();
+////    复制
+////3. LocalDateTime转String时间字符串
+//    LocalDateTime now = LocalDateTime.now();
+//    //LocalDateTime now = LocalDateTime.ofInstant(Instant.ofEpochMilli(new Date().getTime()), ZoneId.of("Asia/Shanghai")
+//
+//    //创建转换对象DateTimeFormatter（日期类型可以自定义：yyyy年MM月dd日）
+//    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//
+//    //方式一：使用LocalDateTime的方法
+//    String date1 = now.format(df);//2019-10-14 或 2019年10月14日
+//    //方式二：使用DateTimeFormatter的方法
+//    String date2 = df.format(now);//2019-10-14 20:35:42
+//    //方式三：使用DateTimeFormatter的枚举
+//    String date3 = now.format(DateTimeFormatter.ISO_DATE);//2019-10-14
+////    复制
+////4.String时间字符串转LocalDateTimeString
+//    //1.按照默认格式解析日期字符串
+//    String str1="2015-06-06";
+//    LocalDate parse1 = LocalDate.parse(str1);
+//
+//    String str2="13:04:35";
+//    LocalTime parse2 = LocalTime.parse(str2);
+//
+//    String str3="2017-08-29T12:12:12";
+//    LocalDateTime parse3 = LocalDateTime.parse(str3);
+//
+//    //2.按照我们自己指定的格式解析字符串
+//    String str4="2015年06月06号";
+//    DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy年MM月dd号");
+//    LocalDate parse = LocalDate.parse(str4, pattern);
+//
+//    String str5="06点06分06秒";
+//    DateTimeFormatter pattern1 = DateTimeFormatter.ofPattern("HH点mm分ss秒");
+//    LocalTime parse4 = LocalTime.parse(str5, pattern1);
+//
+//    String str6="2015年06月06号 06点06分06秒";
+//    DateTimeFormatter pattern2 = DateTimeFormatter.ofPattern("yyyy年MM月dd号 HH点mm分ss秒");
+//    LocalDateTime parse5 = LocalDateTime.parse(str6, pattern2);
+////    复制
+////5. LocalDateTime转时间戳
+//    LocalDate localDate = LocalDate.now();
+//    Long longtimestamp = localDate.atStartOfDay(ZoneOffset.ofHours(8)).toInstant().toEpochMilli();
+//
+//    //根据不同的需要创建LocalDateTime
+//    LocalDateTime localDateTime = LocalDateTime.now()；
+//    //LocalDateTime localDateTime = LocalDateTime.now(ZoneId.systemDefault());
+//
+//    //获取秒数
+//    Long second = localDateTime.toEpochSecond(ZoneOffset.of("+8"));
+//    //获取毫秒数 13位
+//    Long milliSecond = localDateTime.toInstant(ZoneOffset.of("+8")).toEpochMilli();
+//    Long epochMilli = localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+////    复制
+////6.时间戳转 LocalDate, LocalDateTime
+//    Long timestamp = System.currentTimeMillis();
+//    LocalDate localDate=Instant.ofEpochMilli(timestamp).atZone(ZoneOffset.ofHours(8)).toLocalDate();
+//System.out.println(localDate);//2019-10-12
+//
+//    LocalDateTime localDateTime = Instant.ofEpochMilli(timestamp).atZone(ZoneOffset.ofHours(8)).toLocalDateTime();
+//System.out.println(localDateTime);//2019-10-14T20:51:31.175
+////    复制
+////7.添加、减去时间量的方法
+//    //添加年月日时分秒的方法，plus系列的方法
+//    //每次添加完时间量，都会返回一个新的LocalDateTime日期对象
+//    LocalDateTime now = LocalDateTime.now();
+//    LocalDateTime localDateTime = now.plusYears(1);//增加1年
+//    LocalDateTime localDateTime1 = now.plusMonths(2);//增加2月
+//    LocalDateTime localDateTime2 = now.plusDays(10);//增加10天
+//
+//    //减去年月日时分秒的方法，minus系列的方法
+//    //每次减完时间量，也都会返回一个新的LocalDateTime日期对象
+//    LocalDateTime localDateTime3 = now.minusYears(1);//减1年
+//    LocalDateTime localDateTime4 = now.minusMonths(1);//减1月
+//    LocalDateTime localDateTime5 = now.minusDays(1);//减1天
+//
+////    复制
+////    列子：
+//    //例子：判断是今天，还是昨天，还是明天
+//    String time = "2018-08-09 11:20:45";
+//    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+//    LocalDateTime localTime = LocalDateTime.parse(time, dtf);
+//    LocalDateTime startTime = LocalDate.now().atTime(0, 0, 0);
+//    LocalDateTime endTime = LocalDate.now().atTime(23, 59, 59);
+//    LocalDateTime startYesterday = LocalDate.now().plusDays(-1).atTime(0, 0, 0);//2019-10-13T00:00
+//    LocalDateTime endYesterday = LocalDate.now().plusDays(-1).atTime(23, 59, 59);//…… 23:59:59
+//
+//    //如果小于昨天的开始日期
+//  if (localTime.isBefore(startYesterday)) {
+//        System.out.println("时间是过去");
+//    }
+//    //时间是昨天
+//  if (localTime.isAfter(startYesterday) && localTime.isBefore(endYesterday)) {
+//        System.out.println("时间是昨天");
+//    }
+//    //如果大于今天的开始日期，小于今天的结束日期
+//  if (localTime.isAfter(startTime) && localTime.isBefore(endTime)) {
+//        System.out.println("时间是今天");
+//    }
+//    //如果大于今天的结束日期
+//  if (localTime.isAfter(endTime)) {
+//        System.out.println("时间是未来");
+//    }
+//
+////    复制
+////8.设置年月日时分秒的方法，with系列
+//    //LocalDateTime.of()
+//    LocalDateTime now = LocalDateTime.now();
+//    //with系列
+//    LocalDateTime localDateTime = now.withDayOfMonth(10);//设置为10号
+//    LocalDateTime with = now.with(TemporalAdjusters.firstDayOfMonth());//设置为本月第一天
+//    LocalDateTime with1 = now.with(TemporalAdjusters.firstDayOfNextMonth());//下月第一天
+//    LocalDateTime with2 = now.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));//下一个星期五
+//
+////    复制
+////9.Date与LocalDateTime互转
+//    //将java.util.Date 转换为java8 的java.time.LocalDateTime,默认时区为东8区
+//    public static LocalDateTime dateConvertToLocalDateTime(Date date) {
+//        return date.toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
+//    }
+//
+//    //将java8 的 java.time.LocalDateTime 转换为 java.util.Date，默认时区为东8区
+//    public static Date localDateTimeConvertToDate(LocalDateTime localDateTime) {
+//        return Date.from(localDateTime.toInstant(ZoneOffset.of("+8")));
+//    }
+//    复制
+
+//}
+
+    
+
+}
